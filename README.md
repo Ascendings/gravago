@@ -35,7 +35,7 @@ import "gogs.ballantine.tech/gballan1/gravago"
 grav := gravago.New()
 
 // change some options
-grav.SetSize(uint(80)) // set the icon size to 80
+grav.SetSize(80) // set the icon size to 80
 grav.SetIcons("monsterid") // use monsterid default icons
 grav.SetRating("x") // allow x-rated icons
 grav.UseHTTPS(true) // force HTTPS

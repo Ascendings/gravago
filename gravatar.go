@@ -11,7 +11,7 @@ const (
 	baseURL       string = "//www.gravatar.com/avatar/"
 	defaultIcons  string = "retro"
 	defaultRating string = "g"
-	defaultSize   uint   = 64
+	defaultSize   int    = 64
 )
 
 // gravatar object
@@ -19,7 +19,7 @@ type gravatar struct {
 	GravatarURL string
 	Icons       string
 	Rating      string
-	Size        uint
+	Size        int
 }
 
 // New - create new gravatar object instance
@@ -35,7 +35,7 @@ func New() *gravatar {
 }
 
 // SetSize - set size of gravatar image
-func (g *gravatar) SetSize(size uint) {
+func (g *gravatar) SetSize(size int) {
 	g.Size = size
 }
 
