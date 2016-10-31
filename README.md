@@ -2,7 +2,7 @@
 
 Simple go library for creating gravatar.com avatar URLs
 
-**Current version:** 0.3.0
+**Current version:** 0.3.1
 
 ### Credits
 
