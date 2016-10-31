@@ -23,7 +23,7 @@ type gravatar struct {
 }
 
 // New - create new gravatar object instance
-func New() gravatar {
+func New() *gravatar {
 	g := &gravatar{
 		GravatarURL: baseURL,
 		Icons:       defaultIcons,
@@ -35,22 +35,22 @@ func New() gravatar {
 }
 
 // SetSize - set size of gravatar image
-func (g *gravatar) SetSize(uint size) {
+func (g *gravatar) SetSize(size uint) {
 	g.Size = size
 }
 
 // SetRating - set rating
-func (g *gravatar) SetRating(string rating) {
+func (g *gravatar) SetRating(rating string) {
 	g.Rating = rating
 }
 
 // SetIcons - set the default icon to return
-func (g *gravatar) SetIcons(string iconset) {
+func (g *gravatar) SetIcons(iconset string) {
 	g.Icons = iconset
 }
 
 // UseHTTPS - force using HTTPS protocol
-func (g *gravatar) UseHTTPS(bool protocol) {
+func (g *gravatar) UseHTTPS(protocol bool) {
 	if protocol {
 		g.GravatarURL = "https://s.gravatar.com/avatar/"
 	} else {
@@ -58,26 +58,26 @@ func (g *gravatar) UseHTTPS(bool protocol) {
 	}
 }
 
-// URL - return gravatar URL
-func (g *gravatar) URL(string email) string {
-	var GravURL *url.URL
-	GravURL, err := url.Parse(g.GravatarURL)
+// URL - generate gravatar URL string
+func (g *gravatar) URL(email string) string {
+	hashedEmail := emailToHash(email)
+	queryString := g.encodeParameters()
 
-	check(err)
+	gravURL := g.GravatarURL + hashedEmail + queryString
 
-	GravURL.Path += hash + ".jpg"
+	return gravURL
+}
 
+func (g *gravatar) encodeParameters() string {
 	parameters := url.Values{}
 	parameters.Add("s", fmt.Sprintf("%v", g.Size))
 	parameters.Add("r", fmt.Sprintf("%v", g.Rating))
 	parameters.Add("d", fmt.Sprintf("%v", g.Icons))
 
-	GravURL.RawQuery = parameters.Encode()
-
-	return GravURL
+	return "?" + parameters.Encode()
 }
 
-func emailToHash(string email) string {
+func emailToHash(email string) string {
 	hasher := md5.New()
 	hasher.Write([]byte(email))
 	return fmt.Sprintf("%v", hex.EncodeToString(hasher.Sum(nil)))
