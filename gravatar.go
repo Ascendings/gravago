@@ -14,65 +14,65 @@ const (
 	defaultSize   int    = 64
 )
 
-// gravatar object
-type gravatar struct {
-	GravatarURL string
-	Icons       string
-	Rating      string
-	Size        int
+// Gravatar - gravatar object
+type Gravatar struct {
+	gravatarURL string
+	icons       string
+	rating      string
+	size        int
 }
 
 // New - create new gravatar object instance
-func New() *gravatar {
-	g := &gravatar{
-		GravatarURL: baseURL,
-		Icons:       defaultIcons,
-		Rating:      defaultRating,
-		Size:        defaultSize,
+func New() *Gravatar {
+	g := &Gravatar{
+		gravatarURL: baseURL,
+		icons:       defaultIcons,
+		rating:      defaultRating,
+		size:        defaultSize,
 	}
 
 	return g
 }
 
 // SetSize - set size of gravatar image
-func (g *gravatar) SetSize(size int) {
-	g.Size = size
+func (g *Gravatar) SetSize(size int) {
+	g.size = size
 }
 
 // SetRating - set rating
-func (g *gravatar) SetRating(rating string) {
-	g.Rating = rating
+func (g *Gravatar) SetRating(rating string) {
+	g.rating = rating
 }
 
 // SetIcons - set the default icon to return
-func (g *gravatar) SetIcons(iconset string) {
-	g.Icons = iconset
+func (g *Gravatar) SetIcons(iconset string) {
+	g.icons = iconset
 }
 
 // UseHTTPS - force using HTTPS protocol
-func (g *gravatar) UseHTTPS(protocol bool) {
+func (g *Gravatar) UseHTTPS(protocol bool) {
 	if protocol {
-		g.GravatarURL = "https://s.gravatar.com/avatar/"
+		g.gravatarURL = "https://s.gravatar.com/avatar/"
 	} else {
-		g.GravatarURL = "http:" + baseURL
+		g.gravatarURL = "http:" + baseURL
 	}
 }
 
 // URL - generate gravatar URL string
-func (g *gravatar) URL(email string) string {
+func (g *Gravatar) URL(email string) string {
 	hashedEmail := emailToHash(email)
 	queryString := g.encodeParameters()
 
-	gravURL := g.GravatarURL + hashedEmail + queryString
+	gravURL := g.gravatarURL + hashedEmail + queryString
 
 	return gravURL
 }
 
-func (g *gravatar) encodeParameters() string {
+func (g *Gravatar) encodeParameters() string {
 	parameters := url.Values{}
-	parameters.Add("s", fmt.Sprintf("%v", g.Size))
-	parameters.Add("r", fmt.Sprintf("%v", g.Rating))
-	parameters.Add("d", fmt.Sprintf("%v", g.Icons))
+	parameters.Add("s", fmt.Sprintf("%v", g.size))
+	parameters.Add("r", fmt.Sprintf("%v", g.rating))
+	parameters.Add("d", fmt.Sprintf("%v", g.icons))
 
 	return "?" + parameters.Encode()
 }
