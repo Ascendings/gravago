@@ -20,7 +20,7 @@ This library has some inspiration from the  [eefret/gravatar](https://github.com
 
 Just like any other Go package, you can install this baby with `go get ...`
 
-`go get gogs.ballantine.tech/gballan1/gravago`
+`go get github.com/Ascendings/gravago`
 
 ## Usage
 
@@ -46,10 +46,13 @@ gravURL := grav.URL("myemail@example.com")
 
 ## License
 
-This package/program is licensed under the Mozilla Public License, version 2.0
+This package/program is licensed under the 2-Clause BSD License
 
 ## Contact
 
 Email me at: brotherballantine@gmail.com
 
-Or hit me up on [Google+](https://plus.google.com/+GregoryBallantine1) or something
+Feel free to hit me up at
+  * [Mastodon](https://mastodon.rocks/@brotherballan)
+  * [Google+](https://plus.google.com/+GregoryBallantine1)
+  * [Wire](https://wire.com) @brotherballan
