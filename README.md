@@ -2,7 +2,7 @@
 
 Simple go library for creating gravatar.com avatar URLs
 
-**Current version:** 0.3.1
+**Current version:** 0.4.0
 
 ### Credits
 
@@ -29,12 +29,17 @@ Now for the fun stuff... the meat! Seriously, though, this package isn't designe
 For example:
 ```go
 // of course we need to import this package
-import "gogs.ballantine.tech/gballan1/gravago"
+import "github.com/Ascendings/gravago"
 
 // create a new instance
-grav := gravago.New()
+grav := gravago.New(gravago.GravatarOptions{
+  ForceHTTPS: true,
+  IconSet: "mosterid",
+  IconRating: "x",
+  IconSize: 80,
+})
 
-// change some options
+// change some options later on...
 grav.SetSize(80) // set the icon size to 80
 grav.SetIcons("monsterid") // use monsterid default icons
 grav.SetRating("x") // allow x-rated icons
