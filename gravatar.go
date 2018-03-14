@@ -5,13 +5,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"net/url"
-)
-
-const (
-	baseURL       string = "//www.gravatar.com/avatar/"
-	defaultIcons  string = "retro"
-	defaultRating string = "g"
-	defaultSize   int    = 64
+	"strings"
 )
 
 // Gravatar - gravatar object
@@ -23,12 +17,43 @@ type Gravatar struct {
 }
 
 // New - create new gravatar object instance
-func New() *Gravatar {
+func New(opts GravatarOptions) *Gravatar {
+	// declare variables for this function
+	var baseURL    string = ""
+	var iconSet    string = ""
+	var iconRating string = ""
+	var iconSize   int    = 0
+
+	// set the base URL
+	if opts.ForceHTTPS == true {
+		baseURL = strings.Join([]string{"https://s.", defaultBaseURL}, "")
+	} else {
+		baseURL = strings.Join([]string{"//www.", defaultBaseURL}, "")
+	}
+	// set the icon set
+	if opts.IconSet != "" {
+		iconSet = opts.IconSet
+	} else {
+		iconSet = defaultIconSet
+	}
+	// set the icon rating
+	if opts.IconRating != "" {
+		iconRating = opts.IconRating
+	} else {
+		iconRating = defaultIconRating
+	}
+	// set the icon size
+	if opts.IconSize != 0 {
+		iconSize = opts.IconSize
+	} else {
+		iconSize = defaultIconSize
+	}
+
 	g := &Gravatar{
 		gravatarURL: baseURL,
-		icons:       defaultIcons,
-		rating:      defaultRating,
-		size:        defaultSize,
+		icons:       iconSet,
+		rating:      iconRating,
+		size:        iconSize,
 	}
 
 	return g
@@ -52,14 +77,14 @@ func (g *Gravatar) SetIcons(iconset string) {
 // UseHTTPS - force using HTTPS protocol
 func (g *Gravatar) UseHTTPS(protocol bool) {
 	if protocol {
-		g.gravatarURL = "https://s.gravatar.com/avatar/"
+		g.gravatarURL = "https://s." + defaultBaseURL
 	} else {
-		g.gravatarURL = "http:" + baseURL
+		g.gravatarURL = "http://www." + defaultBaseURL
 	}
 }
 
-// URL - generate gravatar URL string
-func (g *Gravatar) URL(email string) string {
+// GetURL - generate gravatar URL string
+func (g *Gravatar) GetURL(email string) string {
 	hashedEmail := emailToHash(email)
 	queryString := g.encodeParameters()
 
