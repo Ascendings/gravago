@@ -49,6 +49,10 @@ grav.UseHTTPS(true) // force HTTPS
 gravURL := grav.URL("myemail@example.com")
 ```
 
+## Contributions
+
+Feel free to fork this repository and submit a PR. Any and all help is welcome! 
+
 ## License
 
 This package/program is licensed under the 2-Clause BSD License
@@ -57,7 +61,8 @@ This package/program is licensed under the 2-Clause BSD License
 
 Email me at: brotherballantine@gmail.com
 
-Feel free to hit me up at
-  * [Mastodon](https://mastodon.rocks/@brotherballan)
+Feel free to hit me up at:
+  * [Email](mailto:gballantine@metaunix.net)
+  * [Mastodon](https://fosstodon.org/@brotherballan)
   * [Google+](https://plus.google.com/+GregoryBallantine1)
   * [Wire](https://wire.com) @brotherballan
